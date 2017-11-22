@@ -1,0 +1,15 @@
+{
+  "name": "todocliclient",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node todo.js",
+    "build": "pkg todo.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pkg": "^4.3.0-beta.1"
+  }
+}
