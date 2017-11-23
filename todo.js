@@ -12,6 +12,12 @@ switch (process.argv[2]) {
     case "update":
         update(process.argv[3], process.argv[4]);
         break;
+    case "delete":
+        remove(process.argv[3]);
+        break;
+    case "create":
+        create(process.argv[3]);
+        break;
     default:
         printUsage();
 }
@@ -38,7 +44,7 @@ function update(id, text) {
 
     let path = "/todo/";
     path += id || "";
-    path += "?text=" + text;
+    path += "?text=" + encodeURIComponent(text);
     let request = new Request("localhost", 3000, path, "PUT");
     request.sendRequest((err, result) => {
             console.log(result);
@@ -51,6 +57,12 @@ function remove(id) {
     }
 
     // delete request
+    let path = "/todo/";
+    path += id || "";
+    let request = new Request("localhost", 3000, path, "DELETE");
+    request.sendRequest((err, result) => {
+            console.log(result);
+    });
 }
 
 function create(text) {
@@ -59,6 +71,12 @@ function create(text) {
     }
 
     // create item request
+    let path = "/todo";
+    path += "?text=" + encodeURIComponent(text);
+    let request = new Request("localhost", 3000, path, "POST");
+    request.sendRequest((err, result) => {
+            console.log(result);
+    });
 }
 
 function printUsage() {
